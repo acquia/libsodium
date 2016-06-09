@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	./autogen.sh
+	./configure --prefix=$(shell pwd)/debian/libsodium/usr
+
+override_dh_auto_build:
+	make
+
+override_dh_install:
+
+
+override_dh_auto_install:
+	mkdir -p debian/libsodium/usr/lib debian/libsodium-dev/usr/lib
+	make install
+	mv debian/libsodium/usr/include debian/libsodium-dev/usr
+	mv debian/libsodium/usr/lib/pkgconfig debian/libsodium-dev/usr/lib
+	mv debian/libsodium/usr/lib/*.a debian/libsodium-dev/usr/lib
+	mv debian/libsodium/usr/lib/*.la debian/libsodium-dev/usr/lib
+
+override_dh_strip:
+	dh_strip --dbg-package=libsodium-dbg

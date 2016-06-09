@@ -1,0 +1,5 @@
+libsodium (1.0.103-1) unstable; urgency=low
+
+  * Initial Package
+
+ -- Libsodium Developers <noreply@example.com>  Mon, 04 Apr 2016 12:00:00 +0000
